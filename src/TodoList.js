@@ -15,6 +15,7 @@ class TodoList extends Component {
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.onCheck = this.onCheck.bind(this);
   }
 
   handleDeleteItem(id) {
@@ -41,6 +42,18 @@ class TodoList extends Component {
     }));
   }
 
+  onCheck(id) {
+    const oldState = this.state.todos.map((todo) => {
+      if (todo.id === id) {
+        todo.isDone = !todo.isDone;
+      }
+
+      return todo;
+    });
+
+    this.setState({ todos: [...oldState] });
+  }
+
   render() {
     const todos = this.state.todos.map((todo) => (
       <div className="item TodoList-item" key={todo.id}>
@@ -51,7 +64,14 @@ class TodoList extends Component {
             onClick={() => this.deleteItem(todo.id)}
           ></i>
         </div>
-        <div className="content">{todo.title}</div>
+        <div className="content">
+          <p
+            onClick={() => this.onCheck(todo.id)}
+            className={`${todo.isDone ? "isDone" : ""}`}
+          >
+            {todo.title}
+          </p>
+        </div>
       </div>
     ));
 

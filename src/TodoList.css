@@ -11,3 +11,7 @@
   border-radius: 4px;
   margin-bottom: 4px;
 }
+
+.isDone {
+  text-decoration: line-through;
+}
